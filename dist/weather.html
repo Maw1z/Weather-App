@@ -16,7 +16,8 @@
         <input type="text" name="place" id="place_search"
           class="w-full h-12 rounded-full border-solid bg-accent2 shadow-md">
       </div>
-      <button class="p-1 m-0 border-none bg-transparent cursor-pointer absolute top-0 right-0 rounded-full" onclick="">
+      <button class="p-1 m-0 border-none bg-transparent cursor-pointer absolute top-0 right-0 rounded-full"
+        onclick="fetchLatAndLon()">
         <img src="./Images/Search.svg" alt="search icon" class="w-10 mr-5">
       </button>
     </div>
@@ -24,117 +25,21 @@
   <main class="mt-4 w-10/12 h-1/2 border-solid border-2 flex flex-col justify-between">
     <div id="current-temp">
       <h2 class="text-3xl font-bold mb-1">
-        US &middot; San Francisco
+        <span id="place_code">US</span> &middot; <span id="place_name">San Francisco</span>
       </h2>
       <h1 class="text-5xl mb-1">
-        <span id="temp-current">35</span>° C
+        <span id="temp_current">35</span> C
       </h1>
       <h4 class="text-xl">
-        H: 38° L: 28°
+        H: <span id="temp_max">38</span> L: <span id="temp_min">28</span>
       </h4>
     </div>
     <div id="hr-temp-box" class="grid grid-flow-col gap-3 overflow-x-auto auto-cols-auto">
-      <div class="w-[70px] border-solid border-2 flex flex-col justify-center items-center py-2 bg-grey1">
-        <div id="hr-time" class="mb-1">
-          <p>
-            11
-          </p>
-        </div>
-        <div id="hr-icon" class="mb-1">
-          <img src="./Images/Weather Icons/MaterialSymbolsClearDayRounded.svg" class="w-6"
-            style="filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(210deg) brightness(97%) contrast(88%);">
-        </div>
-        <div id="hr-temp">
-          <p class="font-bold text-lg">
-            21°
-          </p>
-        </div>
-      </div>
-      <div class="w-[70px] border-solid border-2 flex flex-col justify-center items-center py-2 bg-grey1">
-        <div id="hr-time" class="mb-1">
-          <p>
-            11
-          </p>
-        </div>
-        <div id="hr-icon" class="mb-1">
-          <img src="./Images/Weather Icons/MaterialSymbolsClearDayRounded.svg" class="w-6"
-            style="filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(210deg) brightness(97%) contrast(88%);">
-        </div>
-        <div id="hr-temp">
-          <p class="font-bold text-lg">
-            21°
-          </p>
-        </div>
-      </div>
-      <div class="w-[70px] border-solid border-2 flex flex-col justify-center items-center py-2 bg-grey1">
-        <div id="hr-time" class="mb-1">
-          <p>
-            11
-          </p>
-        </div>
-        <div id="hr-icon" class="mb-1">
-          <img src="./Images/Weather Icons/MaterialSymbolsClearDayRounded.svg" class="w-6"
-            style="filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(210deg) brightness(97%) contrast(88%);">
-        </div>
-        <div id="hr-temp">
-          <p class="font-bold text-lg">
-            21°
-          </p>
-        </div>
-      </div>
-      <div class="w-[70px] border-solid border-2 flex flex-col justify-center items-center py-2 bg-grey1">
-        <div id="hr-time" class="mb-1">
-          <p>
-            11
-          </p>
-        </div>
-        <div id="hr-icon" class="mb-1">
-          <img src="./Images/Weather Icons/MaterialSymbolsClearDayRounded.svg" class="w-6"
-            style="filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(210deg) brightness(97%) contrast(88%);">
-        </div>
-        <div id="hr-temp">
-          <p class="font-bold text-lg">
-            21°
-          </p>
-        </div>
-      </div>
-      <div class="w-[70px] border-solid border-2 flex flex-col justify-center items-center py-2 bg-grey1">
-        <div id="hr-time" class="mb-1">
-          <p>
-            11
-          </p>
-        </div>
-        <div id="hr-icon" class="mb-1">
-          <img src="./Images/Weather Icons/MaterialSymbolsClearDayRounded.svg" class="w-6"
-            style="filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(210deg) brightness(97%) contrast(88%);">
-        </div>
-        <div id="hr-temp">
-          <p class="font-bold text-lg">
-            21°
-          </p>
-        </div>
-      </div>
-      <div class="w-[70px] border-solid border-2 flex flex-col justify-center items-center py-2 bg-grey1">
-        <div id="hr-time" class="mb-1">
-          <p>
-            11
-          </p>
-        </div>
-        <div id="hr-icon" class="mb-1">
-          <img src="./Images/Weather Icons/MaterialSymbolsClearDayRounded.svg" class="w-6"
-            style="filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(210deg) brightness(97%) contrast(88%);">
-        </div>
-        <div id="hr-temp">
-          <p class="font-bold text-lg">
-            21°
-          </p>
-        </div>
-      </div>
     </div>
   </main>
   <section id="weather-details"
-    class="w-screen h-80 border-solid border-t-2 border-x-2 border-black rounded-t-3xl fixed bottom-0 left-0 z-10">
-    <div id="bottom-container" class="ml-9 w-10/12 border-solid border-2">
+    class="w-screen h-80 border-solid border-t-2 border-x-2 border-black rounded-t-3xl fixed bottom-0 left-0 z-10 flex justify-center items-center">
+    <div id="bottom-container" class="w-10/12 border-solid border-2">
       <div id="action-button" class="flex justify-center items-center cursor-pointer" onclick="">
         <img src="./Images/UpArrow.svg" class="w-14">
       </div>
@@ -150,57 +55,57 @@
             </div>
             <div class="flex flex-col ml-4">
               <p class="font-bold"> Feels like</p>
-              <p>21° C</p>
+              <p><span id="feels_like">21</span> C</p>
             </div>
           </div>
           <div class="flex mt-2">
             <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
-              <img src="./Images/Weather now icons/FeelsLike.svg" alt="Feels like" class="w-5 rounded-full"
+              <img src="./Images/Weather now icons/Rain.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Feels like</p>
-              <p>21° C</p>
+              <p class="font-bold"> Rain </p>
+              <p><span id="rain_percentage">5</span> mm</p>
             </div>
           </div>
           <div class="flex mt-2">
             <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
-              <img src="./Images/Weather now icons/FeelsLike.svg" alt="Feels like" class="w-5 rounded-full"
+              <img src="./Images/Weather now icons/Wind.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Feels like</p>
-              <p>21° C</p>
+              <p class="font-bold"> Wind speed</p>
+              <p><span id="wind_speed">10</span> m/s</p>
             </div>
           </div>
           <div class="flex mt-2">
             <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
-              <img src="./Images/Weather now icons/FeelsLike.svg" alt="Feels like" class="w-5 rounded-full"
+              <img src="./Images/Weather now icons/Humidity.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Feels like</p>
-              <p>21° C</p>
+              <p class="font-bold"> Humidity</p>
+              <p><span id="humidity_percentage">10</span>%</p>
             </div>
           </div>
           <div class="flex mt-2">
             <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
-              <img src="./Images/Weather now icons/FeelsLike.svg" alt="Feels like" class="w-5 rounded-full"
+              <img src="./Images/Weather now icons/Sunrise.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Feels like</p>
-              <p>21° C</p>
+              <p class="font-bold"> Sunrise</p>
+              <p><span id="sunrise">3:00</span></p>
             </div>
           </div>
           <div class="flex mt-2">
             <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
-              <img src="./Images/Weather now icons/FeelsLike.svg" alt="Feels like" class="w-5 rounded-full"
+              <img src="./Images/Weather now icons/Sunset.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Feels like</p>
-              <p>21° C</p>
+              <p class="font-bold"> Sunset</p>
+              <p><span id="sunset">18:00</span></p>
             </div>
           </div>
 
@@ -210,19 +115,7 @@
         <h3 class="text-2xl font-bold">
           Predictions
         </h3>
-        <div class="flex justify-center">
-          <div class="w-11/12 flex justify-between text-xl">
-            <p>
-              20/6
-            </p>
-            <p>
-              Rainy
-            </p>
-            <p>
-              H: 30 L: 25
-            </p>
-          </div>
-        </div>
+        <div id="daily_temp_predictions"></div>
       </div>
     </div>
   </section>
