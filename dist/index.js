@@ -87,7 +87,25 @@ function displayCurrentWeather(data) {
   document.getElementById("temp_max").innerHTML = formatTemp(temp_max);
   document.getElementById("temp_min").innerHTML = formatTemp(temp_min);
 
-  // TO DO: Use id to display suitable images in bg
+  // Displaying suitable images in bg based on weather
+  let img_src = "";
+  if (id >= 200 && id <= 232) {
+    img_src = "./Images/Temperature images/thunderstorm.png";
+  } else if (id >= 300 && id <= 531) {
+    img_src = "./Images/Temperature images/rain.png";
+  } else if (id >= 600 && id <= 622) {
+    img_src = "./Images/Temperature images/snow.png";
+  } else if (id == 781) {
+    img_src = "./Images/Temperature images/tornado.png";
+  } else if (id == 800) {
+    img_src = "./Images/Temperature images/clear.png";
+  } else if (id >= 800) {
+    img_src = "./Images/Temperature images/clouds.png";
+  }
+
+  document.getElementById(
+    "temp_image"
+  ).innerHTML = `        <img src="${img_src}" class="w-60">`;
 
   // Displaying weather now details
   document.getElementById("feels_like").innerHTML = formatTemp(feels_like);
@@ -106,8 +124,23 @@ function displayHourlyData(data) {
 
   for (let i = 1; i < 24; i++) {
     let hr_temp = hourlyData[i].temp;
-    let id = hourlyData[i].weather.id;
+    let id = hourlyData[i].weather[0].id;
     let time = hourlyData[i].dt;
+
+    let img_src = "";
+    if (id >= 200 && id <= 232) {
+      img_src = "./Images/Weather Icons/thunderstorm.svg";
+    } else if (id >= 300 && id <= 531) {
+      img_src = "./Images/Weather Icons/rain.svg";
+    } else if (id >= 600 && id <= 622) {
+      img_src = "./Images/Weather Icons/snow.svg";
+    } else if (id == 800) {
+      img_src = "./Images/Weather Icons/clear.svg";
+    } else if (id >= 800) {
+      img_src = "./Images/Weather Icons/clouds.svg";
+    }
+
+    // console.log(img_src);
 
     hr_HTML += `      
     <div class="w-[70px] border-solid border-2 flex flex-col justify-center items-center py-2 bg-grey1">
@@ -117,7 +150,7 @@ function displayHourlyData(data) {
         </p>
       </div>
       <div id="hr-icon" class="mb-1">
-        <img src="./Images/Weather Icons/MaterialSymbolsClearDayRounded.svg" class="w-6"
+        <img src="${img_src}" class="w-6"
           style="filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(210deg) brightness(97%) contrast(88%);">
       </div>
       <div id="hr-temp">
@@ -135,7 +168,7 @@ function displayDailyData(data) {
   let dailyData = data.daily;
   let daily_HTML = "";
 
-  for (let i = 0; i < 8; i++) {
+  for (let i = 1; i < 7; i++) {
     let time_date = formatDate(dailyData[i].dt, timezone);
     let temp_desc = dailyData[i].weather[0].main;
     let daily_temp_max = formatTemp(dailyData[i].temp.max);

@@ -22,8 +22,8 @@
       </button>
     </div>
   </nav>
-  <main class="mt-4 w-10/12 h-1/2 border-solid border-2 flex flex-col justify-between">
-    <div id="current-temp">
+  <main class="mt-4 w-10/12 h-1/2 border-solid border-2 flex flex-col">
+    <div id="current-temp" class="relative">
       <h2 class="text-3xl font-bold mb-1">
         <span id="place_code">US</span> &middot; <span id="place_name">San Francisco</span>
       </h2>
@@ -33,13 +33,15 @@
       <h4 class="text-xl">
         H: <span id="temp_max">38</span> L: <span id="temp_min">28</span>
       </h4>
+      <div id="temp_image" class="w-full -z-10 flex justify-center items-center">
+      </div>
     </div>
     <div id="hr-temp-box" class="grid grid-flow-col gap-3 overflow-x-auto auto-cols-auto">
     </div>
   </main>
   <section id="weather-details"
-    class="w-screen h-80 border-solid border-t-2 border-x-2 border-black rounded-t-3xl fixed bottom-0 left-0 z-10 flex justify-center items-center">
-    <div id="bottom-container" class="w-10/12 border-solid border-2">
+    class="w-screen h-80 bg-white border-solid border-t-2 border-x-2 border-black rounded-t-3xl fixed bottom-0 left-0 z-10 flex justify-center items-center flex-wrap">
+    <div id="bottom-container" class="w-10/12 relative border-solid border-2">
       <div id="action-button" class="flex justify-center items-center cursor-pointer" onclick="">
         <img src="./Images/UpArrow.svg" class="w-14">
       </div>
