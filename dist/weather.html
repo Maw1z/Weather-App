@@ -9,118 +9,140 @@
   <title>mWeather</title>
 </head>
 
-<body class="flex flex-col justify-start items-center w-screen h-screen">
-  <nav class="mt-14 w-10/12 border-solid border-2">
+<body class="flex flex-col items-center w-screen">
+  <nav class="mt-14 w-10/12">
     <div class="relative">
       <div class="flex justify-center items-center">
-        <input type="text" name="place" id="place_search"
-          class="w-full h-12 rounded-full border-solid bg-accent2 shadow-md">
+        <input type="text" name="place" id="place_search" placeholder="Enter city to search"
+          class="w-full h-12 rounded-full bg-accent2 shadow-md pl-5">
       </div>
-      <button class="p-1 m-0 border-none bg-transparent cursor-pointer absolute top-0 right-0 rounded-full"
+      <button class="p-1 m-0 border-none bg-transparent cursor-pointer absolute top-0 right-0 rounded-full z-10"
         onclick="fetchLatAndLon()">
-        <img src="./Images/Search.svg" alt="search icon" class="w-10 mr-5">
+        <img src="./Images/Search.svg" alt="search icon" class="w-8 mt-1 mr-5">
       </button>
     </div>
   </nav>
-  <main class="mt-4 w-10/12 h-1/2 border-solid border-2 flex flex-col">
+  <section id="banner" class="w-2/3 rounded-2xl bg-primary/65 py-8 shadow-xl">
+    <h1 class="text-center font-bold sm:text-4xl lg:text-5xl">
+      Enter city name in search bar to get results
+    </h1>
+  </section>
+  <main class="w-10/12 flex flex-col sm:mt-5 lg:mt-8">
     <div id="current-temp" class="relative">
-      <h2 class="text-3xl font-bold mb-1">
-        <span id="place_code">US</span> &middot; <span id="place_name">San Francisco</span>
+      <h2 class="font-bold mb-1 sm:text-3xl lg:text-5xl">
+        <span id="place"></span>
       </h2>
-      <h1 class="text-5xl mb-1">
-        <span id="temp_current">35</span> C
+      <h1 class="mb-1 sm:text-5xl lg:text-6xl">
+        <span id="temp_current"></span>
       </h1>
-      <h4 class="text-xl">
-        H: <span id="temp_max">38</span> L: <span id="temp_min">28</span>
+      <h4 class="sm:text-xl lg:text-2xl">
+        <span id="temp_max_min"></span>
       </h4>
-      <div id="temp_image" class="w-full -z-10 flex justify-center items-center">
-      </div>
+      <div id="temp_image" class="w-full -z-10 flex justify-center items-center"></div>
     </div>
-    <div id="hr-temp-box" class="grid grid-flow-col gap-3 overflow-x-auto auto-cols-auto">
-    </div>
+    <div id="hr_temp_JS"></div>
   </main>
   <section id="weather-details"
-    class="w-screen h-80 bg-white border-solid border-t-2 border-x-2 border-black rounded-t-3xl fixed bottom-0 left-0 z-10 flex justify-center items-center flex-wrap">
-    <div id="bottom-container" class="w-10/12 relative border-solid border-2">
-      <div id="action-button" class="flex justify-center items-center cursor-pointer" onclick="">
-        <img src="./Images/UpArrow.svg" class="w-14">
+    class="backdrop-blur-sm w-screen sm:bg-white/40 lg:bg-white/65 flex justify-center items-start flex-wrap invisible
+    sm:fixed sm:bottom-0 sm:left-0 sm:z-10 
+    sm:border-solid sm:border-t-2 sm:border-x-2 sm:border-black sm:rounded-t-3xl
+    lg:static lg:border-none lg:rounded-none lg:mt-10 lg:pt-10 lg:pb-10 lg:mb-0 lg:min-h-[40vh] lg:max-h-[60vh] lg:overflow-y-auto">
+    <div id="bottom-container" class="w-10/12 relative flex flex-col lg:flex-row lg:justify-start lg:gap-3">
+      <div id="action-button" class="flex flex-row justify-center items-center cursor-pointer lg:hidden"
+        onclick="toggleWeatherDetails()">
+        <img src="./Images/UpArrow.svg" class="w-14" id="arrow-icon">
       </div>
-      <div class="mt-0">
-        <h3 class="text-2xl font-bold">
+      <div class="sm:mt-0 lg:w-1/2 lg:mt-4">
+        <h3 class="font-bold sm:text-2xl lg:text-4xl">
           Weather now
         </h3>
-        <div class="ml-4 grid grid-cols-2 items-center">
-          <div class="flex mt-2">
-            <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
+        <div class="grid grid-cols-2 items-center 
+          sm:ml-4 sm:mt-1 lg:ml-8">
+          <div class="flex sm:mt-2 lg:mt-4">
+            <div class="bg-accent1-900 rounded-full flex justify-center items-center
+            sm:w-12 sm:h-12 
+            lg:w-14 lg:h-14">
               <img src="./Images/Weather now icons/FeelsLike.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Feels like</p>
-              <p><span id="feels_like">21</span> C</p>
+              <p class="font-bold lg:text-lg"> Feels like</p>
+              <span id="feels_like" class="lg:text-lg"></span>
             </div>
           </div>
-          <div class="flex mt-2">
-            <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
+          <div class="flex sm:mt-2 lg:mt-4">
+            <div class="bg-accent1-900 rounded-full flex justify-center items-center
+            sm:w-12 sm:h-12 
+            lg:w-14 lg:h-14">
               <img src="./Images/Weather now icons/Rain.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Rain </p>
-              <p><span id="rain_percentage">5</span> mm</p>
+              <p class="font-bold lg:text-lg"> Rain </p>
+              <span id="rain_percentage" class="lg:text-lg"></span>
             </div>
           </div>
-          <div class="flex mt-2">
-            <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
+          <div class="flex sm:mt-2 lg:mt-4">
+            <div class="bg-accent1-900 rounded-full flex justify-center items-center
+            sm:w-12 sm:h-12 
+            lg:w-14 lg:h-14">
               <img src="./Images/Weather now icons/Wind.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Wind speed</p>
-              <p><span id="wind_speed">10</span> m/s</p>
+              <p class="font-bold lg:text-lg"> Wind speed</p>
+              <span id="wind_speed" class="lg:text-lg"></span>
             </div>
           </div>
-          <div class="flex mt-2">
-            <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
+          <div class="flex sm:mt-2 lg:mt-4">
+            <div class="bg-accent1-900 rounded-full flex justify-center items-center
+            sm:w-12 sm:h-12 
+            lg:w-14 lg:h-14">
               <img src="./Images/Weather now icons/Humidity.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Humidity</p>
-              <p><span id="humidity_percentage">10</span>%</p>
+              <p class="font-bold lg:text-lg"> Humidity</p>
+              <span id="humidity_percentage" class="lg" text-lg></span>
             </div>
           </div>
-          <div class="flex mt-2">
-            <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
+          <div class="flex sm:mt-2 lg:mt-4">
+            <div class="bg-accent1-900 rounded-full flex justify-center items-center
+            sm:w-12 sm:h-12 
+            lg:w-14 lg:h-14">
               <img src="./Images/Weather now icons/Sunrise.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Sunrise</p>
-              <p><span id="sunrise">3:00</span></p>
+              <p class="font-bold lg:text-lg"> Sunrise</p>
+              <span id="sunrise" class="lg:text-lg"></span>
             </div>
           </div>
-          <div class="flex mt-2">
-            <div class="bg-accent1-900 rounded-full w-12 h-12 flex justify-center items-center">
+          <div class="flex sm:mt-2 lg:mt-4">
+            <div class="bg-accent1-900 rounded-full flex justify-center items-center
+            sm:w-12 sm:h-12 
+            lg:w-14 lg:h-14">
               <img src="./Images/Weather now icons/Sunset.svg" alt="Feels like" class="w-5 rounded-full"
                 style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);">
             </div>
             <div class="flex flex-col ml-4">
-              <p class="font-bold"> Sunset</p>
-              <p><span id="sunset">18:00</span></p>
+              <p class="font-bold lg:text-lg"> Sunset</p>
+              <span id="sunset" class="lg:text-lg">18:00</span>
             </div>
           </div>
-
         </div>
       </div>
-      <div class="mt-4">
-        <h3 class="text-2xl font-bold">
+      <div class="sm:mt-4 lg:w-1/2">
+        <h3 class="font-bold sm:text-2xl lg:text-4xl">
           Predictions
         </h3>
-        <div id="daily_temp_predictions"></div>
+        <div id="daily_temp_predictions_JS" class="mt-1"></div>
       </div>
     </div>
   </section>
+  <div class="relative -z-10">
+    <div class="half-circle bg-gradient-to-t from-accent1-900 to-accent1-100"></div>
+  </div>
 </body>
 <script src="index.js"></script>
 

@@ -9,16 +9,43 @@
     font-family: "Urbanist", sans-serif;
   }
 
+  #banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   .half-circle {
-    z-index: -1;
-    width: 120vw;
-    height: 120vw;
+    width: 110vw;
+    height: 110vw;
     background: linear-gradient(to top, var(--tw-gradient-stops));
     border-radius: 50%;
     position: fixed;
-    bottom: -45vw;
+    bottom: -50vw;
     left: 50%;
     transform: translateX(-50%);
     filter: blur(60px);
+  }
+
+  @media (max-width: 640px) {
+    .half-circle {
+      width: 155vw;
+      height: 155vw;
+      bottom: -75vw;
+    }
+  }
+
+  #weather-details {
+    height: 30vh;
+    overflow: hidden;
+  }
+
+  #weather-details {
+    transition: height 0.3s ease-in-out;
+  }
+
+  #arrow-icon {
+    transition: transform 0.3s ease-in-out;
   }
 }

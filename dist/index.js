@@ -1,5 +1,16 @@
+let input = document.getElementById("place_search");
+
+input.addEventListener("keypress", (event) => {
+  if (event.key == "Enter") {
+    fetchLatAndLon();
+  }
+});
+
 async function fetchLatAndLon() {
   const apiKey = "505b9f7c972bfae070f0eefbc9241b02";
+
+  document.getElementById("banner").style.display = "none";
+  document.getElementById("weather-details").style.visibility = "visible";
 
   try {
     const city = document.getElementById("place_search").value;
@@ -69,7 +80,7 @@ function displayCurrentWeather(data) {
     name: name,
     sys: { country, sunrise, sunset },
     main: { feels_like, temp, temp_max, temp_min, humidity },
-    weather: [{ main, id }],
+    weather: [{ id }],
     timezone: timezone,
     wind: { speed },
     rain,
@@ -77,15 +88,13 @@ function displayCurrentWeather(data) {
 
   const rain1h = rain ? rain["1h"] : 0;
 
-  // Displaying place name
-  document.getElementById("place_code").innerHTML = country;
-  document.getElementById("place_name").innerHTML = name;
+  // Displaying place
+  document.getElementById("place").innerHTML = country + " &middot; " + name;
 
   // Displaying temp in celcius for now
-  document.getElementById("temp_current").innerHTML = formatTemp(temp);
-  // document.getElementById("temp_text").innerHTML = main;
-  document.getElementById("temp_max").innerHTML = formatTemp(temp_max);
-  document.getElementById("temp_min").innerHTML = formatTemp(temp_min);
+  document.getElementById("temp_current").innerHTML = formatTemp(temp) + " C";
+  document.getElementById("temp_max_min").innerHTML =
+    "H: " + formatTemp(temp_max) + " L: " + formatTemp(temp_min);
 
   // Displaying suitable images in bg based on weather
   let img_src = "";
@@ -108,10 +117,11 @@ function displayCurrentWeather(data) {
   ).innerHTML = `        <img src="${img_src}" class="w-60">`;
 
   // Displaying weather now details
-  document.getElementById("feels_like").innerHTML = formatTemp(feels_like);
-  document.getElementById("rain_percentage").innerHTML = rain1h;
-  document.getElementById("wind_speed").innerHTML = speed;
-  document.getElementById("humidity_percentage").innerHTML = humidity;
+  document.getElementById("feels_like").innerHTML =
+    formatTemp(feels_like) + " C";
+  document.getElementById("rain_percentage").innerHTML = rain1h + " mm";
+  document.getElementById("wind_speed").innerHTML = speed + " m/s";
+  document.getElementById("humidity_percentage").innerHTML = humidity + "%";
   document.getElementById("sunrise").innerHTML = formatTime(sunrise, timezone);
   document.getElementById("sunset").innerHTML = formatTime(sunset, timezone);
 }
@@ -120,7 +130,14 @@ function displayHourlyData(data) {
   let timezone = data.timezone_offset;
   let hourlyData = data.hourly;
 
-  let hr_HTML = "";
+  let hr_HTML = `
+    <div class="mb-3">
+    <h3 class="lg:inline sm:hidden text-4xl font-bold">
+      Hourly
+    </h3>
+    </div>
+    <div id="hr-temp-box" class="grid grid-flow-col gap-3 overflow-x-auto overscroll-x-contain auto-cols-auto">
+  `;
 
   for (let i = 1; i < 24; i++) {
     let hr_temp = hourlyData[i].temp;
@@ -140,10 +157,8 @@ function displayHourlyData(data) {
       img_src = "./Images/Weather Icons/clouds.svg";
     }
 
-    // console.log(img_src);
-
     hr_HTML += `      
-    <div class="w-[70px] border-solid border-2 flex flex-col justify-center items-center py-2 bg-grey1">
+    <div class="rounded-sm flex flex-col justify-center items-center py-2 bg-grey1 sm:w-[70px] lg:w-[110px] lg:h-[130px]">
       <div id="hr-time" class="mb-1">
         <p>
           ${getFirstTwoDigit(formatTime(time, timezone))}
@@ -160,7 +175,8 @@ function displayHourlyData(data) {
       </div>
     </div>`;
   }
-  document.getElementById("hr-temp-box").innerHTML = hr_HTML;
+  hr_HTML += `</div>`;
+  document.getElementById("hr_temp_JS").innerHTML = hr_HTML;
 }
 
 function displayDailyData(data) {
@@ -168,7 +184,7 @@ function displayDailyData(data) {
   let dailyData = data.daily;
   let daily_HTML = "";
 
-  for (let i = 1; i < 7; i++) {
+  for (let i = 1; i < 8; i++) {
     let time_date = formatDate(dailyData[i].dt, timezone);
     let temp_desc = dailyData[i].weather[0].main;
     let daily_temp_max = formatTemp(dailyData[i].temp.max);
@@ -176,23 +192,29 @@ function displayDailyData(data) {
 
     daily_HTML += `        
     <div class="flex justify-center">
-      <div class="w-11/12 mb-1 flex justify-between text-xl">
-        <p>
-          ${time_date}
-        </p>
-        <p class="text-center">
-          ${temp_desc}
-        </p>
-        <p>
-          H: ${getFirstTwoDigit(daily_temp_max)} L: ${getFirstTwoDigit(
+      <div class="w-11/12 mb-2 flex justify-between sm:text-xl lg:text-2xl">
+        <div>
+          <p>
+            ${time_date}
+          </p>
+        </div>
+        <div>
+          <p class="text-center">
+            ${temp_desc}
+          </p>
+        </div>
+        <div>
+          <p>
+            H: ${getFirstTwoDigit(daily_temp_max)} L: ${getFirstTwoDigit(
       daily_temp_min
     )}
-        </p>
+          </p>
+        </div>
       </div>
     </div>
     `;
   }
-  document.getElementById("daily_temp_predictions").innerHTML = daily_HTML;
+  document.getElementById("daily_temp_predictions_JS").innerHTML = daily_HTML;
 }
 
 function formatTemp(temp) {
@@ -228,4 +250,19 @@ function formatDate(inputTime, timezone) {
 
 function getFirstTwoDigit(number) {
   return ("" + number).slice(0, 2);
+}
+
+function toggleWeatherDetails() {
+  const weatherDetails = document.getElementById("weather-details");
+  const arrowIcon = document.getElementById("arrow-icon");
+
+  if (weatherDetails.classList.contains("expanded")) {
+    weatherDetails.style.height = "30vh";
+    weatherDetails.classList.remove("expanded");
+    arrowIcon.style.transform = "rotate(0deg)";
+  } else {
+    weatherDetails.style.height = "90vh";
+    weatherDetails.classList.add("expanded");
+    arrowIcon.style.transform = "rotate(180deg)";
+  }
 }
