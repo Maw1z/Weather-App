@@ -41,7 +41,7 @@ async function fetchCurrentWeather(lat, lon) {
   try {
     // Current
     const response = await fetch(
-      `httpss://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
     );
 
     if (!response.ok) {
@@ -61,7 +61,7 @@ async function fetchOtherWeather(lat, lon) {
   try {
     // One call
     const response = await fetch(
-      `httpss://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${apiKey}`
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${apiKey}`
     );
     if (!response.ok) {
       console.error("Error fetching weather: " + response.statusText);
