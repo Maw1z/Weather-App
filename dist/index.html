@@ -9,24 +9,43 @@
   <title>mWeather</title>
 </head>
 
-<body>
-  <nav class="sm:mt-28 sm:mb-14 flex sm:flex-col sm:justify-center sm:items-center">
-    <img src="./Images/Logo.svg" alt="mWeather logo" class="sm:w-2/4 sm:h-2/4">
-    <h1 class="sm:text-3xl text-accent1-900 font-bold">mWeather</h1>
+<body class="flex flex-col justify-center items-center w-screen h-screen">
+  <nav
+    class="w-10/12 flex justify-center items-center sm:mb-6 sm:flex-col
+  lg:fixed lg:top-0 lg:left-0 lg:w-full lg:border-b-solid lg:border-b-2 lg:border-secondary lg:flex-row lg:justify-start lg:h-[100px]">
+    <div class="flex justify-center items-center sm:flex-col lg:flex-row lg:absolute lg:right-3/4">
+      <img src="./Images/Logo.svg" alt="mWeather logo"
+        class="sm:w-[200px] sm:h-[200px] sm:mb-2 lg:w-[60px] lg:h-[60px]">
+      <h1 class="text-accent1-900 font-bold sm:text-3xl lg:text-2xl lg:ml-2">mWeather</h1>
+    </div>
   </nav>
-  <main class="flex sm:flex-col sm:justify-center sm:items-center">
-    <h1 class="sm:text-center sm:w-9/12 sm:mb-10 sm:text-3xl">
-      View your city’s
-      weather and 7-day forecast
-    </h1>
-    <button class="bg-accent1-900 text-primary sm:text-lg font-bold sm:px-14 sm:py-3 rounded-3xl cursor-pointer">
-      <a href="weather.html">
-        Check now
-      </a>
-    </button>
+  <main class="w-10/12 flex flex-col justify-center items-center sm:text-center lg:justify-start lg:-mt-32 lg:-ml-40">
+    <div class="flex justify-center flex-col items-center 
+    sm:w-full sm:text-center lg:w-2/3 lg:text-justify lg:gap-5 lg:items-start">
+      <h1 class="sm:text-4xl lg:text-6xl lg:font-bold lg:text-justify lg:tracking-wide lg:leading-snug">
+        Stay Ahead of the Weather with Real-Time Updates and Forecasts
+      </h1>
+      <div class="w-3/4 flex justify-start">
+        <h3 class="sm:hidden lg:inline-block lg:text-3xl lg:text-grey3">
+          View your city's weather conditions and access a detailed 14-day forecast to stay prepared for any weather.
+        </h3>
+      </div>
+      <button class="bg-accent1-900 text-primary cursor-pointer font-bold rounded-full
+      sm:text-lg sm:px-14 sm:py-3 sm:mt-5 lg:text-2xl lg:px-16 lg:py-4  
+      transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ">
+        <a href="weather.html">
+          Check now
+        </a>
+      </button>
+    </div>
   </main>
-  <div class="relative">
-    <div class="half-circle bg-gradient-to-t from-accent1-900 to-accent1-100"></div>
+  <footer class="fixed bottom-1 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <h4 class="text-grey3 lg:text-2xl">
+      Powered by OpenWeather API
+    </h4>
+  </footer>
+  <div class="relative -z-10">
+    <div class="half-circle bg-gradient-to-t from-accent1-900 to-accent1-100 lg:w-[97vw] lg:h-[97vw]"></div>
   </div>
 </body>
 

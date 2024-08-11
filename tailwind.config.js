@@ -13,6 +13,7 @@ module.exports = {
         accent2: "#DBDBDB",
         grey1: "#D9D9D9",
         grey2: "#434343",
+        grey3: "#616161",
       },
       screens: {
         sm: "360px",

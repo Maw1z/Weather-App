@@ -159,12 +159,12 @@ function displayHourlyData(data) {
 
     hr_HTML += `      
     <div class="rounded-sm flex flex-col justify-center items-center py-2 bg-grey1 sm:w-[70px] lg:w-[110px] lg:h-[130px]">
-      <div id="hr-time" class="mb-1">
+      <div id="hr-time" class="mb-1 lg:mb-2">
         <p>
           ${getFirstTwoDigit(formatTime(time, timezone))}
         </p>
       </div>
-      <div id="hr-icon" class="mb-1">
+      <div id="hr-icon" class="mb-1 lg:mb-2">
         <img src="${img_src}" class="w-6"
           style="filter: invert(32%) sepia(0%) saturate(0%) hue-rotate(210deg) brightness(97%) contrast(88%);">
       </div>
