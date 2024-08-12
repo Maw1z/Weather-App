@@ -18,7 +18,7 @@ mWeather is a simple and elegant weather website that allows users to search for
 
 ## Usage
 1. Visit the Website:
-- Navigate to [mWeather](https://maw1z.github.io/Weather-App/dist/index.html) to access the website or type 'https://maw1z.github.io/Weather-App/dist/index.html' in your browser's searchbar.
+- Navigate to [mWeather](https://maw1z.github.io/Weather-Website/dist/index.html) to access the website or type 'https://maw1z.github.io/Weather-Website/dist/index.html' in your browser's searchbar.
 
 2.  Search for a City:
 - Enter the name of a city in the search bar and press Enter or click the search icon.
