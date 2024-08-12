@@ -10,7 +10,7 @@
 </head>
 
 <body class="flex flex-col items-center w-screen">
-  <nav class="mt-14 w-10/12">
+  <nav class="sm:mt-10 lg:mt-14 w-10/12">
     <div class="relative">
       <div class="flex justify-center items-center">
         <input type="text" name="place" id="place_search" placeholder="Enter city to search"
@@ -23,7 +23,7 @@
       </button>
     </div>
   </nav>
-  <section id="banner" class="w-2/3 rounded-2xl bg-primary/65 py-8 shadow-xl">
+  <section id="banner" class="w-2/3 rounded-2xl bg-primary/65 p-5 shadow-xl">
     <h1 class="text-center font-bold sm:text-4xl lg:text-5xl">
       Enter city name in search bar to get results
     </h1>
@@ -44,9 +44,9 @@
     <div id="hr_temp_JS"></div>
   </main>
   <section id="weather-details"
-    class="backdrop-blur-sm w-screen sm:bg-white/40 lg:bg-white/65 flex justify-center items-start flex-wrap invisible
+    class="backdrop-blur-sm w-screen sm:bg-primary/40 lg:bg-primary/65 flex justify-center items-start flex-wrap invisible
     sm:fixed sm:bottom-0 sm:left-0 sm:z-10 
-    sm:border-solid sm:border-t-2 sm:border-x-2 sm:border-black sm:rounded-t-3xl
+    sm:border-solid sm:border-t-2 sm:border-x-2 sm:border-secondary sm:rounded-t-3xl
     lg:static lg:border-none lg:rounded-none lg:mt-10 lg:pt-10 lg:pb-10 lg:mb-0 lg:min-h-[40vh] lg:max-h-[60vh] lg:overflow-y-auto">
     <div id="bottom-container" class="w-10/12 relative flex flex-col lg:flex-row lg:justify-start lg:gap-3">
       <div id="action-button" class="flex flex-row justify-center items-center cursor-pointer lg:hidden"
